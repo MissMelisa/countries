@@ -8,3 +8,12 @@
   align-items: center;
   justify-content: center;
 }
+.rootCard {
+  width: 400px !important;
+  border: solid #d8e3e7 !important;
+  margin-top: 30px !important;
+  padding: 2px 4px;
+  display: flex;
+  align-items: center;
+  width: 400;
+}
