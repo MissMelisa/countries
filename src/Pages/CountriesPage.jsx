@@ -1,6 +1,8 @@
 import React from "react";
-import Countries from "../Components/Countries";
 import { useQuery } from "react-query";
+
+import Countries from "../Components/Countries";
+import styles from "./styles.module.css";
 
 function CountriesPage() {
   const { data, isLoading } = useQuery("repoData", () =>
@@ -10,7 +12,7 @@ function CountriesPage() {
   );
   if (isLoading) return "Loading...";
   return (
-    <div>
+    <div className={styles.countryList}>
       {data.map((item) => (
         <Countries
           countryName={item.name}

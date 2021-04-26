@@ -1,6 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+import Card from "@material-ui/core/Card";
+import styles from "./styles.module.css";
+
 function Countries({
   countryCode,
   language,
@@ -10,18 +13,18 @@ function Countries({
   currency,
 }) {
   return (
-    <>
-      <div>
+    <Card className={styles.mainContainer}>
+      <div className={styles.mainData}>
         <div>{countryName}</div>
-        <span>{spanName}</span>
+        <span className={styles.spanName}>{spanName}</span>
       </div>
-      <div>
-        <span>Country code {countryCode}</span>
-        <span>Currency{currency}</span>
-        <span>Int. Dial Code {dialCode}</span>
-        <span>Language{language}</span>
+      <div className={styles.infoContainer}>
+        <span className={styles.countryCode}>Country code:{countryCode}</span>
+        <span className={styles.currency}>Currency: {currency}</span>
+        <span className={styles.dialCode}>Int. Dial Code: {dialCode}</span>
+        <span className={styles.language}>Language: {language}</span>
       </div>
-    </>
+    </Card>
   );
 }
 Countries.propTypes = {
