@@ -6,15 +6,26 @@ import InputBase from "@material-ui/core/InputBase";
 import IconButton from "@material-ui/core/IconButton";
 import SearchIcon from "@material-ui/icons/Search";
 import Countries from "../Components/Countries";
+import Checkbox from "@material-ui/core/Checkbox";
+
 import styles from "./styles.module.css";
 
 function CountriesPage() {
   const [input, setInput] = useState("");
-  console.log(input);
+  const [checked, setChecked] = useState("");
+  const [language, setLanguage] = useState("");
 
   function handleOnInputChange(event) {
     setInput(event.target.value);
   }
+
+  const handleChange = (event) => {
+    setChecked(event.target.checked);
+  };
+
+  const handleChangeLanguage = (event) => {
+    setLanguage(event.target.language);
+  };
 
   const { data, isLoading } = useQuery("repoData", () =>
     fetch("https://restcountries.eu/rest/v2/all").then((result) =>
@@ -36,6 +47,25 @@ function CountriesPage() {
         <SearchIcon />
         <IconButton type="submit" aria-label="search"></IconButton>
       </Paper>
+
+      <label>
+        No borders
+        <Checkbox
+          color="green"
+          checked={checked}
+          onChange={handleChange}
+          inputProps={{ "aria-label": "secondary checkbox" }}
+        />
+      </label>
+      <label>
+        Multiple languages
+        <Checkbox
+          color="green"
+          language={language}
+          onChange={handleChangeLanguage}
+          inputProps={{ "aria-label": "secondary checkbox" }}
+        />
+      </label>
 
       <div className={styles.countryList}>
         {data
