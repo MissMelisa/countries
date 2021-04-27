@@ -12,8 +12,9 @@ import styles from "./styles.module.css";
 
 function CountriesPage() {
   const [input, setInput] = useState("");
-  const [checked, setChecked] = useState("");
-  const [language, setLanguage] = useState("");
+  const [checked, setChecked] = useState(false);
+
+  const [language, setLanguage] = useState(false);
 
   function handleOnInputChange(event) {
     setInput(event.target.value);
@@ -24,7 +25,7 @@ function CountriesPage() {
   };
 
   const handleChangeLanguage = (event) => {
-    setLanguage(event.target.language);
+    setLanguage(event.target.checked);
   };
 
   const { data, isLoading } = useQuery("repoData", () =>
@@ -61,7 +62,7 @@ function CountriesPage() {
         Multiple languages
         <Checkbox
           color="green"
-          language={language}
+          checked={language}
           onChange={handleChangeLanguage}
           inputProps={{ "aria-label": "secondary checkbox" }}
         />
@@ -69,13 +70,18 @@ function CountriesPage() {
 
       <div className={styles.countryList}>
         {data
-          .filter((item) =>
-            item.name.toLowerCase().startsWith(input.toLowerCase())
+          .filter(
+            (item) =>
+              item.name.toLowerCase().startsWith(input.toLowerCase()) &&
+              (checked === false ||
+                (checked === true && item.borders.length === 0)) &&
+              (language === false ||
+                (language === true && item.languages.length > 1))
           )
           .map((item) => (
             <Countries
               countryName={item.name}
-              language={item.languages[0].name}
+              language={item.languages.map((language) => language.name).join()}
               countryCode={item.alpha2Code}
               dialCode={item.callingCodes[0]}
               currency={item.currencies[0].code}
