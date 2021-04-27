@@ -9,14 +9,14 @@ function Countries({
   language,
   countryName,
   dialCode,
-  spanName,
+  nativeName,
   currency,
 }) {
   return (
     <Card className={styles.mainContainer}>
       <div className={styles.mainData}>
         <div>{countryName}</div>
-        <span className={styles.spanName}>{spanName}</span>
+        <span className={styles.nativeName}>{nativeName}</span>
       </div>
       <div className={styles.infoContainer}>
         <span className={styles.countryCode}>Country code:{countryCode}</span>

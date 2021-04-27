@@ -1,12 +1,12 @@
 import React from "react";
 import { useQuery } from "react-query";
 
-import Countries from "../Components/Countries";
-import styles from "./styles.module.css";
 import Paper from "@material-ui/core/Button";
 import InputBase from "@material-ui/core/InputBase";
 import IconButton from "@material-ui/core/IconButton";
 import SearchIcon from "@material-ui/icons/Search";
+import Countries from "../Components/Countries";
+import styles from "./styles.module.css";
 
 function CountriesPage() {
   const { data, isLoading } = useQuery("repoData", () =>
@@ -35,7 +35,7 @@ function CountriesPage() {
             countryCode={item.alpha2Code}
             dialCode={item.callingCodes[0]}
             currency={item.currencies[0].code}
-            spanName={item.nativeName}
+            nativeName={item.nativeName}
           />
         ))}
       </div>
