@@ -10,7 +10,6 @@ import styles from "./styles.module.css";
 
 function CountriesPage() {
   const [input, setInput] = useState("");
-  console.log(input);
 
   function handleOnInputChange(event) {
     setInput(event.target.value);
