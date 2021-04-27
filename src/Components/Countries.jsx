@@ -29,7 +29,7 @@ function Countries({
 }
 Countries.propTypes = {
   countryName: PropTypes.string.isRequired,
-  spanName: PropTypes.string.isRequired,
+  nativeName: PropTypes.string.isRequired,
   countryCode: PropTypes.string.isRequired,
   currency: PropTypes.string,
   dialCode: PropTypes.number,
