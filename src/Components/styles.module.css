@@ -21,19 +21,8 @@
   align-items: flex-start;
   padding-left: 8px;
 }
-.countryCode {
+.infoStyle {
   font-size: 20px;
   margin-bottom: 5px;
-}
-.currency {
-  font-size: 20px;
-  margin-bottom: 5px;
-}
-.dialCode {
-  font-size: 20px;
-  margin-bottom: 5px;
-}
-.language {
-  margin-bottom: 5px;
-  font-size: 20px;
+  width: 100%;
 }

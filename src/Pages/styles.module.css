@@ -17,3 +17,13 @@
   align-items: center;
   width: 400;
 }
+.button {
+  display: block;
+  margin-right: 10px;
+  text-transform: none !important;
+  font-size: 15px !important;
+}
+.labelStyle {
+  font-size: 15px;
+  font-weight: 500;
+}

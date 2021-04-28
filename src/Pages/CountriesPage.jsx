@@ -7,14 +7,20 @@ import IconButton from "@material-ui/core/IconButton";
 import SearchIcon from "@material-ui/icons/Search";
 import Countries from "../Components/Countries";
 import Checkbox from "@material-ui/core/Checkbox";
+import InputLabel from "@material-ui/core/InputLabel";
+import MenuItem from "@material-ui/core/MenuItem";
+import FormControl from "@material-ui/core/FormControl";
+import Select from "@material-ui/core/Select";
+import Button from "@material-ui/core/Button";
 
 import styles from "./styles.module.css";
 
 function CountriesPage() {
   const [input, setInput] = useState("");
   const [checked, setChecked] = useState(false);
-
   const [language, setLanguage] = useState(false);
+  const [sortBy, setSortBy] = useState("");
+  const [open, setOpen] = useState(false);
 
   function handleOnInputChange(event) {
     setInput(event.target.value);
@@ -26,6 +32,18 @@ function CountriesPage() {
 
   const handleChangeLanguage = (event) => {
     setLanguage(event.target.checked);
+  };
+
+  const handleChangeSortBy = (event) => {
+    setSortBy(event.target.value);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleOpen = () => {
+    setOpen(true);
   };
 
   const { data, isLoading } = useQuery("repoData", () =>
@@ -49,7 +67,7 @@ function CountriesPage() {
         <IconButton type="submit" aria-label="search"></IconButton>
       </Paper>
 
-      <label>
+      <label className={styles.labelStyle}>
         No borders
         <Checkbox
           color="green"
@@ -58,7 +76,7 @@ function CountriesPage() {
           inputProps={{ "aria-label": "secondary checkbox" }}
         />
       </label>
-      <label>
+      <label className={styles.labelStyle}>
         Multiple languages
         <Checkbox
           color="green"
@@ -67,9 +85,34 @@ function CountriesPage() {
           inputProps={{ "aria-label": "secondary checkbox" }}
         />
       </label>
+      <div>
+        <Button className={styles.button} onClick={handleOpen}>
+          Sort by
+        </Button>
+        <FormControl>
+          <InputLabel id="demo-controlled-open-select-label"></InputLabel>
+          <Select
+            labelId="demo-controlled-open-select-label"
+            id="demo-controlled-open-select"
+            open={open}
+            onClose={handleClose}
+            onOpen={handleOpen}
+            value={sortBy}
+            onChange={handleChangeSortBy}
+          >
+            <MenuItem value="">
+              <em>None</em>
+            </MenuItem>
+            <MenuItem value={"population"}>Population</MenuItem>
+            <MenuItem value={"area"}>Area</MenuItem>
+            <MenuItem value={"border"}>Border</MenuItem>
+          </Select>
+        </FormControl>
+      </div>
 
       <div className={styles.countryList}>
         {data
+
           .filter(
             (item) =>
               item.name.toLowerCase().startsWith(input.toLowerCase()) &&
@@ -78,6 +121,41 @@ function CountriesPage() {
               (language === false ||
                 (language === true && item.languages.length > 1))
           )
+          .sort(function (a, b) {
+            if (!sortBy) {
+              return 0;
+            }
+
+            let areaA = a.area;
+            let areaB = b.area;
+            let bordersA = a.borders;
+            let bordersB = b.borders;
+            let populationA = a.population;
+            let populationB = b.population;
+
+            if (bordersA < bordersB) {
+              return -1;
+            }
+            if (bordersA > bordersB) {
+              return 1;
+            }
+
+            if (areaA < areaB) {
+              return -1;
+            }
+
+            if (areaA > areaB) {
+              return 1;
+            }
+
+            if (populationA < populationB) {
+              return -1;
+            }
+            if (populationA > populationB) {
+              return 1;
+            }
+            return 0;
+          })
           .map((item) => (
             <Countries
               countryName={item.name}
@@ -86,6 +164,9 @@ function CountriesPage() {
               dialCode={item.callingCodes[0]}
               currency={item.currencies[0].code}
               nativeName={item.nativeName}
+              population={item.population}
+              area={item.area}
+              borders={item.borders.join()}
             />
           ))}
       </div>
