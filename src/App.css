@@ -1,5 +1,8 @@
 .App {
   text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .App-logo {
@@ -12,7 +15,14 @@
     animation: App-logo-spin infinite 20s linear;
   }
 }
-
+html {
+  background: url("https://wallpaperaccess.com/full/2910946.jpg") no-repeat
+    center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -21,7 +31,6 @@
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  background-color: #126e82;
 }
 
 .App-link {
