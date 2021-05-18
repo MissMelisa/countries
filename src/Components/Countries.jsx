@@ -1,10 +1,10 @@
+import React from "react";
 import PropTypes from "prop-types";
-import cn from "classnames";
 
 import Card from "@material-ui/core/Card";
 import styles from "./styles.module.css";
 
-function Country({
+function Countries({
   countryCode,
   language,
   countryName,
@@ -14,18 +14,11 @@ function Country({
   population,
   area,
   borders,
-  handleOnClickSelected,
-  selected,
 }) {
   return (
-    <Card
-      onClick={handleOnClickSelected}
-      className={cn(styles.mainContainer, {
-        [styles.enlarge]: selected,
-      })}
-    >
+    <Card className={styles.mainContainer}>
       <div className={styles.mainData}>
-        <div className={styles.name}>{countryName}</div>
+        <div>{countryName}</div>
         <span className={styles.nativeName}>{nativeName}</span>
       </div>
       <div className={styles.infoContainer}>
@@ -40,7 +33,7 @@ function Country({
     </Card>
   );
 }
-Country.propTypes = {
+Countries.propTypes = {
   countryName: PropTypes.string.isRequired,
   nativeName: PropTypes.string.isRequired,
   countryCode: PropTypes.string.isRequired,
@@ -51,4 +44,4 @@ Country.propTypes = {
   borders: PropTypes.number,
 };
 
-export default Country;
+export default Countries;

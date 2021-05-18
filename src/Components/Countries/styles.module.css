@@ -8,13 +8,15 @@
   cursor: pointer;
 }
 .enlarge {
+  max-width: 300px;
+  max-height: 400px;
   display: grid;
   grid-row: span 2;
   grid-column: span 2;
 }
 
 .mainData {
-  align-self: center;
+  align-self: flex-start;
   background-color: #687980;
   width: 100%;
 }
