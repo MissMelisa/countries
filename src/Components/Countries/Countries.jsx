@@ -36,7 +36,7 @@ function Country({
         <span className={styles.infoStyle}>Language: {language}</span>
         <span className={styles.infoStyle}>Population: {population}</span>
         <span className={styles.infoStyle}>Area: {area || 0}</span>
-        <span className={styles.infoStyle}>Borders: {borders || 0}</span>
+        <span className={styles.infoStyle}>Borders: {borders || "-"}</span>
       </div>
     </Card>
   );
@@ -49,7 +49,7 @@ Country.propTypes = {
   dialCode: PropTypes.number,
   language: PropTypes.string,
   area: PropTypes.number,
-  borders: PropTypes.number,
+  borders: PropTypes.string,
 };
 
 export default Country;
