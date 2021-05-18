@@ -10,9 +10,7 @@ function App() {
       <QueryClientProvider client={queryClient}>
         <Router>
           <Switch>
-            <Route path="/" exact />
-
-            <Route path="/home" exact>
+            <Route path="/" exact>
               <CountriesPage />
             </Route>
           </Switch>
