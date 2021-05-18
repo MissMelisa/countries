@@ -1,19 +1,29 @@
 .mainContainer {
   display: flex;
   width: 100%;
+  height: 100%;
   margin-left: 30px;
   flex-direction: column;
-  max-width: 300px;
+
+  cursor: pointer;
+}
+.enlarge {
+  display: grid;
+  grid-row: span 2;
+  grid-column: span 2;
 }
 
 .mainData {
   align-self: center;
-  background-color: #d8e3e7;
+  background-color: #687980;
   width: 100%;
+}
+.name {
+  font-size: 25px;
 }
 .nativeName {
   font-size: 20px;
-  color: grey;
+  color: #eeeeee;
 }
 .infoContainer {
   display: flex;

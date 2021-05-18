@@ -7,19 +7,17 @@ const queryClient = new QueryClient();
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <QueryClientProvider client={queryClient}>
-          <Router>
-            <Switch>
-              <Route path="/" exact />
+      <QueryClientProvider client={queryClient}>
+        <Router>
+          <Switch>
+            <Route path="/" exact />
 
-              <Route path="/home" exact>
-                <CountriesPage />
-              </Route>
-            </Switch>
-          </Router>
-        </QueryClientProvider>
-      </header>
+            <Route path="/home" exact>
+              <CountriesPage />
+            </Route>
+          </Switch>
+        </Router>
+      </QueryClientProvider>
     </div>
   );
 }

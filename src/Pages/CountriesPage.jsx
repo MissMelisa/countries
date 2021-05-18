@@ -5,7 +5,7 @@ import Paper from "@material-ui/core/Button";
 import InputBase from "@material-ui/core/InputBase";
 import IconButton from "@material-ui/core/IconButton";
 import SearchIcon from "@material-ui/icons/Search";
-import Countries from "../Components/Countries";
+import Country from "../Components/Countries/Countries";
 import Checkbox from "@material-ui/core/Checkbox";
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
@@ -21,6 +21,12 @@ function CountriesPage() {
   const [language, setLanguage] = useState(false);
   const [sortBy, setSortBy] = useState("");
   const [open, setOpen] = useState(false);
+  const [selected, setSelected] = useState("");
+
+  function handleOnClickSelected(name) {
+    // setSelected(selected === true ? false : true);
+    setSelected(name);
+  }
 
   function handleOnInputChange(event) {
     setInput(event.target.value);
@@ -54,62 +60,64 @@ function CountriesPage() {
   if (isLoading) return "Loading...";
 
   return (
-    <>
-      <Paper className={styles.rootCard} component="form">
-        <IconButton aria-label="menu"></IconButton>
-        <InputBase
-          id="search"
-          onChange={handleOnInputChange}
-          placeholder="Enter country name"
-          inputProps={{ "aria-label": "Enter country name" }}
-        />
-        <SearchIcon />
-        <IconButton type="submit" aria-label="search"></IconButton>
-      </Paper>
-
-      <label className={styles.labelStyle}>
-        No borders
-        <Checkbox
-          color="green"
-          checked={checked}
-          onChange={handleChange}
-          inputProps={{ "aria-label": "secondary checkbox" }}
-        />
-      </label>
-      <label className={styles.labelStyle}>
-        Multiple languages
-        <Checkbox
-          color="green"
-          checked={language}
-          onChange={handleChangeLanguage}
-          inputProps={{ "aria-label": "secondary checkbox" }}
-        />
-      </label>
-      <div>
-        <Button className={styles.button} onClick={handleOpen}>
-          Sort by
-        </Button>
-        <FormControl>
-          <InputLabel id="demo-controlled-open-select-label"></InputLabel>
-          <Select
-            labelId="demo-controlled-open-select-label"
-            id="demo-controlled-open-select"
-            open={open}
-            onClose={handleClose}
-            onOpen={handleOpen}
-            value={sortBy}
-            onChange={handleChangeSortBy}
-          >
-            <MenuItem value="">
-              <em>None</em>
-            </MenuItem>
-            <MenuItem value={"population"}>Population</MenuItem>
-            <MenuItem value={"area"}>Area</MenuItem>
-            <MenuItem value={"border"}>Border</MenuItem>
-          </Select>
-        </FormControl>
+    <div className={styles.mainContainerPage}>
+      <div className={styles.containerExtras}>
+        <Paper className={styles.rootCard} component="form">
+          <IconButton aria-label="menu"></IconButton>
+          <InputBase
+            id="search"
+            onChange={handleOnInputChange}
+            placeholder="Enter country name"
+            inputProps={{ "aria-label": "Enter country name" }}
+          />
+          <SearchIcon />
+          <IconButton type="submit" aria-label="search"></IconButton>
+        </Paper>
+        <div className={styles.checkboxStyles}>
+          <label className={styles.labelStyle}>
+            No borders
+            <Checkbox
+              color="green"
+              checked={checked}
+              onChange={handleChange}
+              inputProps={{ "aria-label": "secondary checkbox" }}
+            />
+          </label>
+          <label className={styles.labelStyle}>
+            Multiple languages
+            <Checkbox
+              color="green"
+              checked={language}
+              onChange={handleChangeLanguage}
+              inputProps={{ "aria-label": "secondary checkbox" }}
+            />
+          </label>
+          <div>
+            <Button className={styles.button} onClick={handleOpen}>
+              Sort by
+            </Button>
+            <FormControl>
+              <InputLabel id="demo-controlled-open-select-label"></InputLabel>
+              <Select
+                labelId="demo-controlled-open-select-label"
+                id="demo-controlled-open-select"
+                open={open}
+                onClose={handleClose}
+                onOpen={handleOpen}
+                value={sortBy}
+                onChange={handleChangeSortBy}
+              >
+                <MenuItem value="">
+                  <em>None</em>
+                </MenuItem>
+                <MenuItem value={"population"}>Population</MenuItem>
+                <MenuItem value={"area"}>Area</MenuItem>
+                <MenuItem value={"border"}>Border</MenuItem>
+              </Select>
+            </FormControl>
+          </div>
+        </div>
       </div>
-
       <div className={styles.countryList}>
         {data
 
@@ -157,7 +165,9 @@ function CountriesPage() {
             return 0;
           })
           .map((item) => (
-            <Countries
+            <Country
+              selected={selected === item.name}
+              handleOnClickSelected={() => handleOnClickSelected(item.name)}
               countryName={item.name}
               language={item.languages.map((language) => language.name).join()}
               countryCode={item.alpha2Code}
@@ -170,7 +180,7 @@ function CountriesPage() {
             />
           ))}
       </div>
-    </>
+    </div>
   );
 }
 
